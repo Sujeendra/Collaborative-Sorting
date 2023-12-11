@@ -4,7 +4,6 @@
 ### How to run?
 ```
 roslaunch pr2_gazebo pr2_test.launch
-- move the robot manually to 4,4 - x,y
 roslaunch pr2_gazebo test.launch
 roslaunch pr2_arm_kinematics  pr2_ik_rarm_node.launch
 roslaunch pr2_arm_kinematics  pr2_ik_larm_node.launch

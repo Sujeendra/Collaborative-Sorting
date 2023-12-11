@@ -2,6 +2,7 @@
   <h2 align="center">Pr2 Pick and Place Simulation in Ros/Gazebo</h2>
 </p>
 
+<img src="pr2.png">
 
 ### How to run?
 ```

@@ -27,6 +27,10 @@ export ROS_PACKAGE_PATH=/home/sujee/catkin_ws/src/arm_navigation_msgs:/home/suje
 Paste the command in bashrc file if you get python 2 and python 3 version conflict
 sudo ln -sf /usr/bin/python3 /usr/local/bin/python
 ```
+### Other details
+```
+action_pr2 is the main package where all the magic happens. Please edit action_pr2.cpp file inside src to modify the heuristics. Each of the sequential tasks inside the main function is numbered. 
+```
 <p align="center">
   <h2 align="center">UR5 Pick and Place Simulation in Ros/Gazebo</h2>
 

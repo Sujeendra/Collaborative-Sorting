@@ -1,10 +1,13 @@
 <p align="center">
   <h2 align="center">Pr2 Pick and Place Simulation in Ros/Gazebo</h2>
 </p>
+
 ### How to run?
 ```
 roslaunch pr2_gazebo pr2_test.launch
+--manually move the robot from 0,0 to 4,4 see the picture for information 
 roslaunch pr2_gazebo test.launch
+--add the table marble as shown in the picture and then place the box model on top of that
 roslaunch pr2_arm_kinematics  pr2_ik_rarm_node.launch
 roslaunch pr2_arm_kinematics  pr2_ik_larm_node.launch
 cd catkin_ws/src/ik_trajectory_tutorial/bin/

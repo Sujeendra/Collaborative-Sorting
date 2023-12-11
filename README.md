@@ -1,7 +1,18 @@
 <p align="center">
   <h2 align="center">Pr2 Pick and Place Simulation in Ros/Gazebo</h2>
 </p>
-
+### How to run?
+```
+roslaunch pr2_gazebo pr2_test.launch
+- move the robot manually to 4,4 - x,y
+roslaunch pr2_gazebo test.launch
+roslaunch pr2_arm_kinematics  pr2_ik_rarm_node.launch
+roslaunch pr2_arm_kinematics  pr2_ik_larm_node.launch
+cd catkin_ws/src/ik_trajectory_tutorial/bin/
+./ik_trajectory_tutorial
+cd catkin_ws/src/action_pr2/bin/
+./action_pr2
+```
 <p align="center">
   <h2 align="center">UR5 Pick and Place Simulation in Ros/Gazebo</h2>
 

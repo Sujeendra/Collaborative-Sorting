@@ -29,7 +29,10 @@ sudo ln -sf /usr/bin/python3 /usr/local/bin/python
 ```
 ### Other details
 ```
-action_pr2 is the main package where all the magic happens. Please edit action_pr2.cpp file inside src to modify the heuristics. Each of the sequential tasks inside the main function is numbered. 
+action_pr2 is the main package where all the magic happens. Please edit action_pr2.cpp file inside src to modify the heuristics. Each of the sequential tasks inside the main function is numbered.
+
+To buid the cpp file stay in action_pr2 and run make command
+executables are available in bin folder which can be executed like ./action_pr2
 ```
 <p align="center">
   <h2 align="center">UR5 Pick and Place Simulation in Ros/Gazebo</h2>

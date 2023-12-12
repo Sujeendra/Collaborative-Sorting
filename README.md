@@ -1,4 +1,40 @@
 <p align="center">
+  <h2 align="center">Pr2 Pick and Place Simulation in Ros/Gazebo</h2>
+</p>
+
+<img src="pr2.png">
+
+### How to run?
+```
+cd to src and build with catkin build
+roslaunch pr2_gazebo pr2_test.launch
+--manually move the robot from 0,0 to 4,4 see the picture for information 
+roslaunch pr2_gazebo test.launch
+--add the table marble as shown in the picture and then place the box model on top of that
+roslaunch pr2_arm_kinematics  pr2_ik_rarm_node.launch
+roslaunch pr2_arm_kinematics  pr2_ik_larm_node.launch
+cd catkin_ws/src/ik_trajectory_tutorial/bin/
+./ik_trajectory_tutorial
+cd catkin_ws/src/action_pr2/bin/
+./action_pr2
+```
+### Troubleshoot
+```
+If you find issues while building using make or catkin build then set the ros package path variable as shown below
+
+export ROS_PACKAGE_PATH=/home/sujee/catkin_ws/src/arm_navigation_msgs:/home/sujee/catkin_ws/src/ros_control/controller_manager_msgs:/home/sujee/catkin_ws/src/convex_decomposition:/home/sujee/catkin_ws/src/gazebo_ros_pkgs/gazebo_dev:/home/sujee/catkin_ws/src/gazebo_ros_pkgs/gazebo_msgs:/home/sujee/catkin_ws/src/gazebo_ros_pkgs/gazebo_ros:/home/sujee/catkin_ws/src/gazebo_ros_pkgs/gazebo_plugins:/home/sujee/catkin_ws/src/gazebo_ros_pkgs/gazebo_ros_pkgs:/home/sujee/catkin_ws/src/ros_control/hardware_interface:/home/sujee/catkin_ws/src/ros_control/combined_robot_hw:/home/sujee/catkin_ws/src/ros_control/controller_interface:/home/sujee/catkin_ws/src/ros_control/controller_manager:/home/sujee/catkin_ws/src/ros_control/controller_manager_tests:/home/sujee/catkin_ws/src/ros_control/combined_robot_hw_tests:/home/sujee/catkin_ws/src/ivcon:/home/sujee/catkin_ws/src/ros_control/joint_limits_interface:/home/sujee/catkin_ws/src/kinematics_msgs:/home/sujee/catkin_ws/src/pr2_kinematics/pr2_arm_kinematics:/home/sujee/catkin_ws/src/pr2_common/pr2_common:/home/sujee/catkin_ws/src/pr2_simulator/pr2_controller_configuration_gazebo:/home/sujee/catkin_ws/src/pr2_common/pr2_dashboard_aggregator:/home/sujee/catkin_ws/src/pr2_common/pr2_description:/home/sujee/catkin_ws/src/pr2_mechanism/pr2_hardware_interface:/home/sujee/catkin_ws/src/pr2_kinematics/pr2_kinematics:/home/sujee/catkin_ws/src/pr2_common/pr2_machine:/home/sujee/catkin_ws/src/pr2_mechanism/pr2_mechanism:/home/sujee/catkin_ws/src/pr2_mechanism/pr2_mechanism_model:/home/sujee/catkin_ws/src/pr2_mechanism/pr2_controller_interface:/home/sujee/catkin_ws/src/pr2_mechanism_msgs:/home/sujee/catkin_ws/src/pr2_mechanism/pr2_mechanism_diagnostics:/home/sujee/catkin_ws/src/pr2_mechanism/pr2_controller_manager:/home/sujee/catkin_ws/src/pr2_common/pr2_msgs:/home/sujee/catkin_ws/src/pr2_simulator/pr2_gazebo_plugins:/home/sujee/catkin_ws/src/pr2_simulator/pr2_gazebo:/home/sujee/catkin_ws/src/pr2_simulator/pr2_simulator:/home/sujee/catkin_ws/src/robot_pose_ekf:/home/sujee/catkin_ws/src/ros_control/ros_control:/home/sujee/catkin_ws/src/ros_control/rqt_controller_manager:/home/sujee/catkin_ws/src/ros_control/transmission_interface:/home/sujee/catkin_ws/src/gazebo_ros_pkgs/gazebo_ros_control:/home/sujee/ws_moveit/src/moveit_tutorials:/home/sujee/ws_moveit/src/panda_moveit_config:/opt/ros/noetic/share:/home/sujee/catkin_ws/src/ik_trajectory_tutorial:/home/sujee/catkin_ws/src/simple_gripper:/home/sujee/catkin_ws/src/pr2_moveit_config:/home/sujee/catkin_ws/src/drive_base_tutorial:/home/sujee/catkin_ws/src/action_pr2:/home/sujee/catkin_ws/src/euro_pallet
+
+Paste the command in bashrc file if you get python 2 and python 3 version conflict
+sudo ln -sf /usr/bin/python3 /usr/local/bin/python
+```
+### Other details
+```
+action_pr2 is the main package where all the magic happens. Please edit pr2.cpp file inside src to modify the heuristics. Each of the sequential tasks inside the main function is numbered.
+
+To buid the cpp file stay in action_pr2 and run make command
+executables are available in bin folder which can be executed like ./action_pr2
+```
+<p align="center">
   <h2 align="center">UR5 Pick and Place Simulation in Ros/Gazebo</h2>
 
   

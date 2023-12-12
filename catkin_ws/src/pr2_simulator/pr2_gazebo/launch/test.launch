@@ -1,0 +1,6 @@
+<launch>
+  <!-- send table urdf to param server -->
+
+  <!-- push table_description to factory and spawn robot in gazebo -->
+  <node name="spawn_table" pkg="gazebo_ros" type="spawn_model" args="-file $(find pr2_gazebo)/urdf/test.urdf -urdf  -z 0.01 -model table_model" respawn="false" output="screen" />
+</launch>

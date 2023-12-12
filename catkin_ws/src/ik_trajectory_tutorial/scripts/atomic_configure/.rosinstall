@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/sujee/catkin_ws/src/ik_trajectory_tutorial/scripts/devel/setup.sh

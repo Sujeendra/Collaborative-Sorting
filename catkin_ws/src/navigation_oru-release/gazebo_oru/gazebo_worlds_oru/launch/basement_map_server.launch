@@ -1,0 +1,22 @@
+<launch>
+
+<!-- The /map should be the same as /world - since there are many node that will use a map of some kind
+     this to avoid having to utilize tf to get the map origin... change the .yaml file instead
+
+ -->
+<node pkg="tf" type="static_transform_publisher" name="origin_broadcaster" 
+    args="0 0 0 0 0 0 /world map 100" />
+
+<node name="map_server" pkg="map_server" type="map_server" args="$(find gazebo_worlds_oru)/maps/basement.yaml"/>
+
+<node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf" output="screen">
+<!-- Set the input and output frames -->
+<param name="output_frame" value="/base_link" />
+<param name="output_base_frame" value="/odom_combined" />
+<!-- Add any other parameters as needed -->
+</node>
+
+<!-- Transform from odom_combined to map -->
+<node pkg="tf" type="static_transform_publisher" name="odom_combined_to_map" args="0 0 0 0 0 0 /odom_combined /map 50" />
+
+</launch>

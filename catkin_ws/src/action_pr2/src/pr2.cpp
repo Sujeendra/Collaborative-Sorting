@@ -156,7 +156,7 @@ public:
     gazebo_msgs::GetModelState getRobotState;
     getRobotState.request.model_name = "pr2";
     int iter=0;
-    while(getModelStateClient.call(getRobotState) && iter<140)
+    while(getModelStateClient.call(getRobotState) && iter<70)
     {
       auto current_x=getRobotState.response.pose.position.x;
       auto current_y=getRobotState.response.pose.position.y;
@@ -183,7 +183,7 @@ public:
       cmd_vel_pub_.publish(base_cmd);
     }
     iter=0;
-    while(getModelStateClient.call(getRobotState) && iter<50)
+    while(getModelStateClient.call(getRobotState) && iter<40)
     {
       current_x=getRobotState.response.pose.position.x;
       current_y=getRobotState.response.pose.position.y;
@@ -214,7 +214,7 @@ public:
     gazebo_msgs::GetModelState getRobotState;
     getRobotState.request.model_name = "pr2";
     int iter=0;
-    while(getModelStateClient.call(getRobotState) && iter<625)
+    while(getModelStateClient.call(getRobotState) && iter<400)
     {
       auto current_x=getRobotState.response.pose.position.x;
       auto current_y=getRobotState.response.pose.position.y;

@@ -24,19 +24,15 @@
     <arg name="KINECT1" value="$(arg KINECT1)" />
     <arg name="KINECT2" value="$(arg KINECT2)" />
   </include>
-  <!-- <node name="spawn_table" pkg="gazebo_ros" type="spawn_model" args="-file $(find pr2_gazebo)/urdf/test.urdf -urdf  -z 0.01 -model table_model" respawn="false" output="screen" /> -->
+
+  <node name="spawn_table" pkg="gazebo_ros" type="spawn_model" args="-file $(find pr2_gazebo)/urdf/test.urdf -urdf -x 1.04 -y 0.311661 -z 0.626703 -R 0.0 -P 0.0 -Y -3.022480 -model table_model" respawn="false" output="screen" />
 
   <!-- -J r_upper_arm_roll_joint -1.64 -J r_shoulder_pan_joint -2.135 -J r_shoulder_lift_joint -0.02 -J r_forearm_roll_joint -1.64 -J r_elbow_flex_joint -2.07 -J r_wrist_flex_joint -1.68 -J r_wrist_roll_joint 1.40 --> 
   <!--include file="$(find pr2_controller_configuration_gazebo)/launch/pr2_default_controllers.launch" /-->
 
-  <!-- spawn table and tabletop object
-  <param name="table_description" 
-   command="$(find xacro)/xacro.py '$(find pr2_gazebo)/urdf/table.urdf.xacro'" />
-  <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param table_description -model table" 
-   respawn="false" output="screen" />
+  <!-- spawn table and tabletop object -->
+  <node name="spawn_table_marble" pkg="gazebo_ros" type="spawn_model" args="-sdf -file $(find pr2_gazebo)/urdf/table_marble/model.sdf -x 1.529973 -y 0.999725 -z 0.3 -R 0.0 -P 0.0 -Y -1.57 -model table_marble" respawn="false" output="screen" />
 
-
-  -->
 
   <!-- parameters that give you reasonable physics as well as good speed -->
   <!-- needed so that gripper joint stops on objects instead of oscillating forever

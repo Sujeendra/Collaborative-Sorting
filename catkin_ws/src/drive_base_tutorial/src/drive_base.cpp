@@ -77,7 +77,7 @@ public:
     gazebo_msgs::GetModelState getRobotState;
     getRobotState.request.model_name = "pr2";
     int iter=0;
-    while(getModelStateClient.call(getRobotState) && iter<140)
+    while(getModelStateClient.call(getRobotState) && iter<3)
     {
       auto current_x=getRobotState.response.pose.position.x;
       auto current_y=getRobotState.response.pose.position.y;

@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<robot name="dustbin">
+  <!-- Main body (box representing the dustbin) -->
+  <link name="base_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.5 0.5 0.4"/>
+      </geometry>
+      <material name="green">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.5 0.5 0.4"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+    </inertial>
+  </link>
+
+  <!-- Horizontal handle -->
+  <link name="handle_link_l">
+    <visual>
+      <geometry>
+        <!-- <cylinder length="0.5" radius="0.02"/> -->
+                <box size="0.03 0.03 0.5"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <geometry>
+        <!-- <cylinder length="0.5" radius="0.02"/> -->
+                <box size="0.03 0.03 0.5"/>
+
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.01"/>
+      <origin rpy="0 1.57 0" xyz="0.25 0 0.4"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <link name="handle_link_r">
+    <visual>
+      <geometry>
+        <!-- <cylinder length="0.5" radius="0.02"/> -->
+                <box size="0.03 0.03 0.5"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <geometry>
+        <!-- <cylinder length="0.5" radius="0.02"/> -->
+                <box size="0.03 0.03 0.5"/>
+
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.01"/>
+      <origin rpy="0 1.57 0" xyz="0.25 0 0.4"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+
+  </link>
+
+   <link name="central_link">
+    <visual>
+      <geometry>
+        <!-- <cylinder length="0.5" radius="0.02"/> -->
+                <box size="0.03 0.03 0.5"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <geometry>
+        <!-- <cylinder length="0.5" radius="0.02"/> -->
+                <box size="0.03 0.03 0.5"/>
+
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.01"/>
+      <origin rpy="1.57 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <!-- Joint connecting handle to the dustbin -->
+  <joint name="handle_joint_l" type="fixed">
+    <parent link="base_link"/>
+    <child link="handle_link_l"/>
+    <origin rpy="0 1.57 0" xyz="0.1 0.25 0.2"/>
+  </joint>
+
+  <joint name="handle_joint_r" type="fixed">
+    <parent link="base_link"/>
+    <child link="handle_link_r"/>
+    <origin rpy="0 1.57 0" xyz="0.1 -0.25 0.2"/>
+  </joint>
+
+  <joint name="central_joint_l" type="fixed">
+    <parent link="handle_link_l"/>
+    <child link="central_link"/>
+    <origin rpy="1.57 0 0" xyz="0 -0.25 0.25"/>
+  </joint>
+  
+
+</robot>
+

@@ -5,7 +5,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.5 0.5 0.4"/>
+        <box size="0.5 0.5 0.15"/>
       </geometry>
       <material name="green">
         <color rgba="0 1 0 1"/>
@@ -14,7 +14,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.5 0.5 0.4"/>
+        <box size="0.5 0.5 0.15"/>
       </geometry>
     </collision>
     <inertial>
@@ -42,7 +42,7 @@
     </collision>
     <inertial>
       <mass value="0.01"/>
-      <origin rpy="0 1.57 0" xyz="0.25 0 0.4"/>
+      <origin rpy="0 1.57 0" xyz="0.25 0 0.15"/>
       <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
     </inertial>
   </link>
@@ -64,7 +64,7 @@
     </collision>
     <inertial>
       <mass value="0.01"/>
-      <origin rpy="0 1.57 0" xyz="0.25 0 0.4"/>
+      <origin rpy="0 1.57 0" xyz="0.25 0 0.15"/>
       <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
     </inertial>
 
@@ -507,13 +507,13 @@
   <joint name="handle_joint_l" type="fixed">
     <parent link="base_link"/>
     <child link="handle_link_l"/>
-    <origin rpy="0 1.57 0" xyz="0.1 0.25 0.2"/>
+    <origin rpy="0 1.57 0" xyz="0.1 0.25 0.07"/>
   </joint>
 
   <joint name="handle_joint_r" type="fixed">
     <parent link="base_link"/>
     <child link="handle_link_r"/>
-    <origin rpy="0 1.57 0" xyz="0.1 -0.25 0.2"/>
+    <origin rpy="0 1.57 0" xyz="0.1 -0.25 0.07"/>
   </joint>
 
   <joint name="central_joint_l" type="fixed">
@@ -588,11 +588,6 @@
     <!-- Adjust joint properties like origin, axis, etc. as needed -->
     <origin rpy="0 0 0" xyz="0.1 0 0"/>
   </joint>
-
-
-<gazebo>
-    <static>true</static>
-</gazebo>
 
 </robot>
 

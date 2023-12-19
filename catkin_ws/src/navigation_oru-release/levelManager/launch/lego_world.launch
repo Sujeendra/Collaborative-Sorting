@@ -45,12 +45,11 @@
         args="-sdf -file $(arg sdf_robot_file) -model work_table -x 0 -y -0.558 -z 0 -Y -3.1415926535"
   output="screen" />-->
 
-  <include file="$(find ur5_gazebo)/launch/ur5_controllers.launch" />
 
-  <group ns="pr2">
-    <include file="$(find pr2_gazebo)/launch/pr2.launch">
-    </include>
-  </group>
+<!--   <include file="$(find pr2_gazebo)/launch/pr2.launch">
+    </include> -->
+
+  <include file="$(find ur5_gazebo)/launch/ur5_controllers.launch" />
 
   <group ns="cititruck">
     <include file="$(find cititruck_gazebo)/launch/cititruck.launch">
@@ -67,7 +66,7 @@
   <group ns="pallet1">
   <param name="tf_prefix" value="pallet1" />
     <include file="$(find euro_pallet)/launch/euro_pallet.launch" >
-      <arg name="pose_x" value="-0.371759"/> 
+      <arg name="pose_x" value="-0.971759"/> 
       <arg name="pose_y" value="-3.948493"/>
       <arg name="pose_z" value="0.1"/>
       <arg name="pose_yaw" default="0"/>

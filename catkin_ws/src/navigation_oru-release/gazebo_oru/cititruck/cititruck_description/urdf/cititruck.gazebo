@@ -298,11 +298,11 @@
   </gazebo>
 
   <gazebo reference="left_fork" >
-    <material>Gazebo/Grey</material>
+    <material>Gazebo/Brown</material>
   </gazebo>
 
   <gazebo reference="right_fork" >
-    <material>Gazebo/Grey</material>
+    <material>Gazebo/Brown</material>
   </gazebo>
 
   <gazebo reference="fixed_left_wheel_link" >

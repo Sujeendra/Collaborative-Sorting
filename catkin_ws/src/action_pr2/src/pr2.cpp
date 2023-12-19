@@ -156,7 +156,7 @@ public:
     gazebo_msgs::GetModelState getRobotState;
     getRobotState.request.model_name = "pr2";
     int iter=0;
-    while(getModelStateClient.call(getRobotState) && iter<70)
+    while(getModelStateClient.call(getRobotState) && iter<140)
     {
       auto current_x=getRobotState.response.pose.position.x;
       auto current_y=getRobotState.response.pose.position.y;
@@ -183,7 +183,7 @@ public:
       cmd_vel_pub_.publish(base_cmd);
     }
     iter=0;
-    while(getModelStateClient.call(getRobotState) && iter<40)
+    while(getModelStateClient.call(getRobotState) && iter<50)
     {
       current_x=getRobotState.response.pose.position.x;
       current_y=getRobotState.response.pose.position.y;
@@ -208,21 +208,15 @@ public:
   }
   bool drive_backwards()
   {
-    std::cout << "Robot started moving";
-    ros::ServiceClient getModelStateClient = nh_.serviceClient<gazebo_msgs::GetModelState>("/gazebo/get_model_state");
-    getModelStateClient.waitForExistence();
-    gazebo_msgs::GetModelState getRobotState;
-    getRobotState.request.model_name = "pr2";
+    ROS_INFO("Robot started moving");
+    
     int iter=0;
-    while(getModelStateClient.call(getRobotState) && iter<400)
+    while(iter<500)
     {
-      auto current_x=getRobotState.response.pose.position.x;
-      auto current_y=getRobotState.response.pose.position.y;
       //we will be sending commands of type "twist"
       geometry_msgs::Twist base_cmd;
-      double theta = std::abs(std::atan(current_x/current_y));
-      base_cmd.angular.z = -theta;
-      base_cmd.linear.x = 1;
+      base_cmd.angular.z = 0.75;
+      base_cmd.linear.x = 0.25;
       cmd_vel_pub_.publish(base_cmd);
       std::this_thread::sleep_for(std::chrono::milliseconds(100));
       // ROS_INFO("theta %f",theta);
@@ -234,15 +228,65 @@ public:
   }
   bool move_back()
   {
-    std::cout << "Robot started moving";
+    ROS_INFO("Robot started moving");
     int iter=0;
-    while(iter<60)
+    while(iter<155)
     {
       geometry_msgs::Twist base_cmd;
       base_cmd.linear.x = -1;
       cmd_vel_pub_.publish(base_cmd);
       std::this_thread::sleep_for(std::chrono::milliseconds(500));
       iter+=1;
+    }
+
+    return true;
+  }
+  bool move_forward()
+  {
+    std::cout << "Robot started moving";
+    int iter=0;
+    while(iter<13)
+    {
+      geometry_msgs::Twist base_cmd;
+      base_cmd.linear.x = 1;
+      cmd_vel_pub_.publish(base_cmd);
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+      iter+=1;
+    }
+
+    return true;
+  }
+  bool last_move_forward()
+  {
+    std::cout << "Robot started moving";
+    int iter=0;
+    while(iter<150)
+    {
+      geometry_msgs::Twist base_cmd;
+      base_cmd.linear.x = 1;
+      cmd_vel_pub_.publish(base_cmd);
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+      iter+=1;
+    }
+
+    return true;
+  }
+  bool move_right()
+  {
+    ROS_INFO("Robot started moving");
+    
+    int iter=0;
+    while(iter<300)
+    {
+      //we will be sending commands of type "twist"
+      geometry_msgs::Twist base_cmd;
+      base_cmd.angular.z = -0.75;
+      base_cmd.linear.x = 0.25;
+      cmd_vel_pub_.publish(base_cmd);
+      std::this_thread::sleep_for(std::chrono::milliseconds(100));
+      // ROS_INFO("theta %f",theta);
+      iter+=1;
+    
     }
 
     return true;
@@ -306,10 +350,10 @@ int main(int argc, char** argv)
     try
     {
 
-        std::vector<std::vector<double>> positions_r = {{0.73, -0.19, 0.74}};
+        std::vector<std::vector<double>> positions_r = {{0.73, -0.19, 0.825}};
         std::vector<std::vector<double>> orientations_r = {{0.92, -0.09, 0.0, 1.0}};
 
-        std::vector<std::vector<double>> positions_l = {{0.73, 0.19, 0.74}};
+        std::vector<std::vector<double>> positions_l = {{0.73, 0.19, 0.825}};
         std::vector<std::vector<double>> orientations_l = {{0.92, -0.09, 0.0, 1.0}};
 
         bool success_r = call_execute_cartesian_ik_trajectory_right("/base_link", positions_r, orientations_r, executeCartesianIKClientRight);
@@ -333,105 +377,110 @@ int main(int argc, char** argv)
 
     //(3)
     RobotDriver driver(nh);
-    driver.drive();
+    driver.move_forward();
 
-    //(4)
-    try
-    {
+  //   //(4)
+  //   try
+  //   {
 
-        std::vector<std::vector<double>> positions_r = {{0.73, -0.19, 0.74}};
-        std::vector<std::vector<double>> orientations_r = {{0.92, -0.09, 0.0, 1.0}};
+  //       std::vector<std::vector<double>> positions_r = {{0.73, -0.19, 0.74}};
+  //       std::vector<std::vector<double>> orientations_r = {{0.92, -0.09, 0.0, 1.0}};
 
-        std::vector<std::vector<double>> positions_l = {{0.73, 0.19, 0.74}};
-        std::vector<std::vector<double>> orientations_l = {{0.92, -0.09, 0.0, 1.0}};
+  //       std::vector<std::vector<double>> positions_l = {{0.73, 0.19, 0.74}};
+  //       std::vector<std::vector<double>> orientations_l = {{0.92, -0.09, 0.0, 1.0}};
 
-        bool success_r = call_execute_cartesian_ik_trajectory_right("/base_link", positions_r, orientations_r, executeCartesianIKClientRight);
+  //       bool success_r = call_execute_cartesian_ik_trajectory_right("/base_link", positions_r, orientations_r, executeCartesianIKClientRight);
 
-        bool success_l = call_execute_cartesian_ik_trajectory_right("/base_link", positions_l, orientations_l, executeCartesianIKClientLeft);
+  //       bool success_l = call_execute_cartesian_ik_trajectory_right("/base_link", positions_l, orientations_l, executeCartesianIKClientLeft);
 
-        if (success_r && success_l)
-        {
-            ROS_INFO("Trajectory succeeded!");
-        }
-        else
-        {
-            ROS_INFO("Trajectory failed.");
-        }
-    }
-    catch (const std::exception& e)
-    {
-        ROS_ERROR("Service call failed: %s", e.what());
-        return 1;
-    }
+  //       if (success_r && success_l)
+  //       {
+  //           ROS_INFO("Trajectory succeeded!");
+  //       }
+  //       else
+  //       {
+  //           ROS_INFO("Trajectory failed.");
+  //       }
+  //   }
+  //   catch (const std::exception& e)
+  //   {
+  //       ROS_ERROR("Service call failed: %s", e.what());
+  //       return 1;
+  //   }
     //(5)
     gripper_right_.close();
     gripper_left_.close();
 
-    //(6)
-    try
-    {
+  //   //(6)
+  //   try
+  //   {
 
-        std::vector<std::vector<double>> positions_r = {{0.73, -0.19, 0.83}};
-        std::vector<std::vector<double>> orientations_r = {{0.92, -0.09, 0.0, 1.0}};
+  //       std::vector<std::vector<double>> positions_r = {{0.73, -0.19, 0.83}};
+  //       std::vector<std::vector<double>> orientations_r = {{0.92, -0.09, 0.0, 1.0}};
 
-        std::vector<std::vector<double>> positions_l = {{0.73, 0.19, 0.83}};
-        std::vector<std::vector<double>> orientations_l = {{0.92, -0.09, 0.0, 1.0}};
+  //       std::vector<std::vector<double>> positions_l = {{0.73, 0.19, 0.83}};
+  //       std::vector<std::vector<double>> orientations_l = {{0.92, -0.09, 0.0, 1.0}};
 
-        bool success_r = call_execute_cartesian_ik_trajectory_right("/base_link", positions_r, orientations_r, executeCartesianIKClientRight);
+  //       bool success_r = call_execute_cartesian_ik_trajectory_right("/base_link", positions_r, orientations_r, executeCartesianIKClientRight);
 
-        bool success_l = call_execute_cartesian_ik_trajectory_right("/base_link", positions_l, orientations_l, executeCartesianIKClientLeft);
+  //       bool success_l = call_execute_cartesian_ik_trajectory_right("/base_link", positions_l, orientations_l, executeCartesianIKClientLeft);
 
-        if (success_r && success_l)
-        {
-            ROS_INFO("Trajectory succeeded!");
-        }
-        else
-        {
-            ROS_INFO("Trajectory failed.");
-        }
-    }
-    catch (const std::exception& e)
-    {
-        ROS_ERROR("Service call failed: %s", e.what());
-        return 1;
-    }
+  //       if (success_r && success_l)
+  //       {
+  //           ROS_INFO("Trajectory succeeded!");
+  //       }
+  //       else
+  //       {
+  //           ROS_INFO("Trajectory failed.");
+  //       }
+  //   }
+  //   catch (const std::exception& e)
+  //   {
+  //       ROS_ERROR("Service call failed: %s", e.what());
+  //       return 1;
+  //   }
 
     //(8)
+    driver.move_back();
     driver.drive_backwards();
-  //(9)
-      try
-      {
+  // //(9)
+  //     try
+  //     {
 
-          std::vector<std::vector<double>> positions_r = {{0.73, -0.19, 0.70}};
-          std::vector<std::vector<double>> orientations_r = {{0.92, -0.09, 0.0, 1.0}};
+  //         std::vector<std::vector<double>> positions_r = {{0.73, -0.19, 0.60}};
+  //         std::vector<std::vector<double>> orientations_r = {{0.92, -0.09, 0.0, 1.0}};
 
-          std::vector<std::vector<double>> positions_l = {{0.73, 0.19, 0.70}};
-          std::vector<std::vector<double>> orientations_l = {{0.92, -0.09, 0.0, 1.0}};
+  //         std::vector<std::vector<double>> positions_l = {{0.73, 0.19, 0.60}};
+  //         std::vector<std::vector<double>> orientations_l = {{0.92, -0.09, 0.0, 1.0}};
 
-          bool success_r = call_execute_cartesian_ik_trajectory_right("/base_link", positions_r, orientations_r, executeCartesianIKClientRight);
+  //         bool success_r = call_execute_cartesian_ik_trajectory_right("/base_link", positions_r, orientations_r, executeCartesianIKClientRight);
 
-          bool success_l = call_execute_cartesian_ik_trajectory_right("/base_link", positions_l, orientations_l, executeCartesianIKClientLeft);
+  //         bool success_l = call_execute_cartesian_ik_trajectory_right("/base_link", positions_l, orientations_l, executeCartesianIKClientLeft);
 
-          if (success_r && success_l)
-          {
-              ROS_INFO("Trajectory succeeded!");
-          }
-          else
-          {
-              ROS_INFO("Trajectory failed.");
-          }
-      }
-      catch (const std::exception& e)
-      {
-          ROS_ERROR("Service call failed: %s", e.what());
-          return 1;
-      }
-    //(10)
+  //         if (success_r && success_l)
+  //         {
+  //             ROS_INFO("Trajectory succeeded!");
+  //         }
+  //         else
+  //         {
+  //             ROS_INFO("Trajectory failed.");
+  //         }
+  //     }
+  //     catch (const std::exception& e)
+  //     {
+  //         ROS_ERROR("Service call failed: %s", e.what());
+  //         return 1;
+  //     }
+  //   //(10)
     gripper_right_.open();
     gripper_left_.open();
 
-    //(11)
     driver.move_back();
+    driver.move_right();
+    driver.last_move_forward();
+
+  //   //(11)
+  //   driver.move_back();
 
   return 0;
 }

@@ -1,3 +1,5 @@
+[Video Link] (https://drive.google.com/file/d/13kMoPuHIcCJWYj_Qpt0jZghUgsjBHJkK/view?usp=sharing)
+
 <p align="center">
   <h2 align="center">Pr2 Pick and Place Simulation in Ros/Gazebo</h2>
 </p>
